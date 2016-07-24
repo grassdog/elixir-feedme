@@ -24,23 +24,7 @@ defmodule Feedme.Test.Parsers.Atom do
   test "parse_meta", %{sample1: sample1} do
     assert Atom.parse_meta(sample1) == %Feedme.MetaData{
       title: "Example Feed",
-      last_build_date: %Timex.DateTime{
-        calendar: :gregorian,
-        day: 13,
-        hour: 18,
-        minute: 30,
-        month: 12,
-        ms: 0,
-        second: 2,
-        timezone: %Timex.TimezoneInfo{
-          abbreviation: "UTC",
-          from: :min,
-          full_name: "UTC",
-          offset_std: 0,
-          offset_utc: 0,
-          until: :max},
-        year: 2003
-      },
+      last_build_date: Timex.to_datetime({{2003, 12, 13}, {18, 30, 2}}, "UTC"),
       link: "http://example.org/",
       author: "John Doe"
     }
@@ -52,24 +36,7 @@ defmodule Feedme.Test.Parsers.Atom do
     assert Atom.parse_entry(entry) == %Feedme.Entry{
       title: "Atom-Powered Robots Run Amok",
       link: "http://example.org/2003/12/13/atom03",
-      publication_date: %Timex.DateTime{
-        calendar: :gregorian,
-        day: 13,
-        hour: 18,
-        minute: 30,
-        month: 12,
-        ms: 0,
-        second: 2,
-        timezone: %Timex.TimezoneInfo{
-          abbreviation: "UTC",
-          from: :min,
-          full_name: "UTC",
-          offset_std: 0,
-          offset_utc: 0,
-          until: :max
-        },
-        year: 2003
-      },
+      publication_date: Timex.to_datetime({{2003, 12, 13}, {18, 30, 2}}, "UTC"),
       description: "Some text."
     }
   end
